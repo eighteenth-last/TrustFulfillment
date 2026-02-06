@@ -1,0 +1,205 @@
+@charset "UTF-8";
+/* 主题变量 */
+/* 圆角 */
+/* 间距 */
+.page.data-v-bee5b748 {
+  min-height: 100vh;
+  background: #f5f7fa;
+  padding-bottom: 120rpx;
+}
+.search-box.data-v-bee5b748 {
+  margin: 32rpx;
+  background: #fff;
+  border-radius: 48rpx;
+  padding: 24rpx 32rpx;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+.search-icon.data-v-bee5b748 {
+  font-size: 32rpx;
+}
+.search-input.data-v-bee5b748 {
+  flex: 1;
+  font-size: 28rpx;
+}
+.section.data-v-bee5b748 {
+  margin: 0 32rpx 32rpx;
+}
+.section-title.data-v-bee5b748 {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+.faq-list.data-v-bee5b748 {
+  background: #fff;
+  border-radius: 24rpx;
+  overflow: hidden;
+}
+.faq-item.data-v-bee5b748 {
+  border-bottom: 1rpx solid #f5f5f5;
+}
+.faq-item.data-v-bee5b748:last-child {
+  border-bottom: none;
+}
+.faq-question.data-v-bee5b748 {
+  padding: 32rpx;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+.faq-q-icon.data-v-bee5b748 {
+  width: 48rpx;
+  height: 48rpx;
+  background: #00AFE1;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.faq-q-text.data-v-bee5b748 {
+  flex: 1;
+  font-size: 28rpx;
+  color: #333;
+}
+.faq-arrow.data-v-bee5b748 {
+  font-size: 32rpx;
+  color: #ccc;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+}
+.faq-arrow.open.data-v-bee5b748 {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+.faq-answer.data-v-bee5b748 {
+  padding: 0 32rpx 32rpx;
+  display: flex;
+  gap: 16rpx;
+  background: #f9fafb;
+}
+.faq-a-icon.data-v-bee5b748 {
+  width: 48rpx;
+  height: 48rpx;
+  background: #10b981;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.faq-a-text.data-v-bee5b748 {
+  flex: 1;
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.6;
+}
+.contact-card.data-v-bee5b748 {
+  background: #fff;
+  border-radius: 24rpx;
+  overflow: hidden;
+}
+.contact-item.data-v-bee5b748 {
+  padding: 32rpx;
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+.contact-item.data-v-bee5b748:last-child {
+  border-bottom: none;
+}
+.contact-icon.data-v-bee5b748 {
+  font-size: 48rpx;
+}
+.contact-info.data-v-bee5b748 {
+  flex: 1;
+}
+.contact-label.data-v-bee5b748 {
+  font-size: 28rpx;
+  color: #333;
+  display: block;
+  margin-bottom: 8rpx;
+}
+.contact-value.data-v-bee5b748 {
+  font-size: 24rpx;
+  color: #999;
+}
+.feedback-btn.data-v-bee5b748 {
+  margin: 48rpx 32rpx;
+  background: linear-gradient(135deg, #00AFE1 0%, #0084A8 100%);
+  color: #fff;
+  border-radius: 48rpx;
+  padding: 32rpx;
+  text-align: center;
+  font-size: 30rpx;
+  font-weight: 600;
+  box-shadow: 0 8rpx 24rpx rgba(0, 175, 225, 0.3);
+}
+.feedback-modal.data-v-bee5b748 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.feedback-content.data-v-bee5b748 {
+  width: 600rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 32rpx;
+}
+.feedback-header.data-v-bee5b748 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+.feedback-title.data-v-bee5b748 {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+.feedback-close.data-v-bee5b748 {
+  font-size: 40rpx;
+  color: #999;
+}
+.feedback-textarea.data-v-bee5b748 {
+  width: 100%;
+  height: 300rpx;
+  background: #f5f7fa;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  font-size: 28rpx;
+  margin-bottom: 16rpx;
+}
+.feedback-count.data-v-bee5b748 {
+  text-align: right;
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 24rpx;
+}
+.feedback-submit.data-v-bee5b748 {
+  width: 100%;
+  background: #00AFE1;
+  color: #fff;
+  border-radius: 48rpx;
+  padding: 24rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  border: none;
+}

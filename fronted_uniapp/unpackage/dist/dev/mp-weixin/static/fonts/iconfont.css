@@ -1,0 +1,201 @@
+/**
+ * 本地图标样式
+ * 使用 CSS 和 Unicode 符号实现，无需外部字体文件
+ */
+
+.iconfont {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 32rpx;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: inline-block;
+}
+
+/* 使用 Unicode 符号代替图标字体 */
+.icon-bell:before,
+.icon-notification:before {
+  content: "🔔";
+}
+
+.icon-search:before {
+  content: "🔍";
+}
+
+.icon-home:before {
+  content: "🏠";
+}
+
+.icon-order:before,
+.icon-document:before {
+  content: "📋";
+}
+
+.icon-task:before {
+  content: "📝";
+}
+
+.icon-user:before,
+.icon-profile:before {
+  content: "👤";
+}
+
+.icon-wallet:before {
+  content: "💰";
+}
+
+.icon-message:before {
+  content: "💬";
+}
+
+.icon-setting:before {
+  content: "⚙️";
+}
+
+.icon-shield:before,
+.icon-security:before {
+  content: "🛡️";
+}
+
+.icon-help:before {
+  content: "❓";
+}
+
+.icon-star:before {
+  content: "⭐";
+}
+
+.icon-check:before,
+.icon-success:before {
+  content: "✓";
+}
+
+.icon-close:before {
+  content: "✕";
+}
+
+.icon-arrow-right:before {
+  content: "→";
+}
+
+.icon-arrow-left:before {
+  content: "←";
+}
+
+.icon-arrow-down:before {
+  content: "↓";
+}
+
+.icon-arrow-up:before {
+  content: "↑";
+}
+
+.icon-add:before,
+.icon-plus:before {
+  content: "+";
+}
+
+.icon-minus:before {
+  content: "−";
+}
+
+.icon-time:before,
+.icon-clock:before {
+  content: "🕐";
+}
+
+.icon-calendar:before {
+  content: "📅";
+}
+
+.icon-location:before {
+  content: "📍";
+}
+
+.icon-phone:before {
+  content: "📞";
+}
+
+.icon-camera:before {
+  content: "📷";
+}
+
+.icon-image:before {
+  content: "🖼️";
+}
+
+.icon-lock:before {
+  content: "🔒";
+}
+
+.icon-unlock:before {
+  content: "🔓";
+}
+
+.icon-bank-card:before {
+  content: "💳";
+}
+
+.icon-contract:before {
+  content: "📄";
+}
+
+.icon-verified:before {
+  content: "✓";
+}
+
+.icon-warning:before {
+  content: "⚠️";
+}
+
+.icon-error:before {
+  content: "❌";
+}
+
+.icon-info:before {
+  content: "ℹ️";
+}
+
+.icon-refresh:before {
+  content: "↻";
+}
+
+.icon-share:before {
+  content: "↗️";
+}
+
+.icon-edit:before {
+  content: "✎";
+}
+
+.icon-delete:before {
+  content: "🗑️";
+}
+
+.icon-qrcode:before {
+  content: "⊞";
+}
+
+.icon-scan:before {
+  content: "⊡";
+}
+
+.icon-service:before {
+  content: "👨‍💼";
+}
+
+.icon-dispute:before {
+  content: "⚖️";
+}
+
+.icon-transaction:before {
+  content: "💱";
+}
+
+.icon-escrow:before {
+  content: "🤝";
+}
+
+.icon-blockchain:before {
+  content: "⛓️";
+}

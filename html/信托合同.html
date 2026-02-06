@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>臻托 (TF) 平台原型 - 合同发起流程</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', 'PingFang SC', sans-serif;
+            background-color: #f0f4f8;
+            scroll-behavior: smooth;
+        }
+
+        .phone-frame {
+            width: 430px;
+            height: 932px;
+            background: #fff;
+            border: 12px solid #1a1a1a;
+            border-radius: 55px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            flex-shrink: 0;
+            margin: 20px;
+        }
+
+        .dynamic-island {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 35px;
+            background: #1a1a1a;
+            border-radius: 20px;
+            z-index: 100;
+        }
+
+        .bg-tf-gradient {
+            background: linear-gradient(135deg, #00AFE1 0%, #0084A8 100%);
+        }
+
+        .text-tf { color: #00AFE1; }
+        .bg-tf { background-color: #00AFE1; }
+        .border-tf { border-color: #00AFE1; }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .pages-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 40px;
+            justify-items: center;
+        }
+
+        @media (min-width: 1000px) {
+            .pages-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        .status-bar {
+            height: 44px;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #00AFE1;
+            box-shadow: 0 0 0 2px rgba(0, 175, 225, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航 -->
+    <div class="fixed top-0 left-0 right-0 bg-white shadow-md z-[1000] p-4 flex justify-center gap-4 overflow-x-auto no-scrollbar">
+        <button onclick="scrollToPage('p9')" class="px-4 py-2 bg-tf text-white rounded-full text-sm font-bold shadow-lg transition">9. 商家发起协议</button>
+        <button onclick="scrollToPage('p10')" class="px-4 py-2 bg-white text-tf border border-tf rounded-full text-sm font-bold shadow transition">10. 用户确认支付</button>
+        <div class="w-px bg-gray-200 mx-2"></div>
+        <button onclick="window.history.back()" class="px-4 py-2 text-gray-400 text-sm">返回前序页面</button>
+    </div>
+
+    <div class="pt-24 pages-grid">
+
+        <!-- PAGE 9: 商家填写信息 (发起端) -->
+        <div id="p9" class="phone-frame">
+            <div class="dynamic-island"></div>
+            <div class="status-bar mt-4">
+                <span>9:41</span>
+                <i class="fas fa-battery-full"></i>
+            </div>
+            
+            <div class="h-full bg-white overflow-y-auto no-scrollbar pb-32">
+                <div class="p-6">
+                    <div class="flex items-center gap-3 mb-6">
+                        <i class="fas fa-chevron-left text-gray-400"></i>
+                        <h1 class="text-xl font-bold">发起信托协议</h1>
+                    </div>
+
+                    <div class="space-y-5">
+                        <!-- 甲方信息 -->
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 mb-2 uppercase">委托方 (甲方) 名称</label>
+                            <input type="text" placeholder="请输入客户单位或个人名称" class="w-full bg-gray-50 border border-gray-100 rounded-2xl p-4 text-sm outline-none transition" value="智创科技传媒有限公司">
+                        </div>
+
+                        <!-- 项目基础信息 -->
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 mb-2 uppercase">项目名称</label>
+                            <input type="text" placeholder="例如：臻托小程序UI设计" class="w-full bg-gray-50 border border-gray-100 rounded-2xl p-4 text-sm outline-none transition" value="臻托 TrustFulfillment 全案设计">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-400 mb-2 uppercase">开始时间</label>
+                                <input type="date" class="w-full bg-gray-50 border border-gray-100 rounded-2xl p-4 text-sm outline-none" value="2023-10-25">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-400 mb-2 uppercase">交付日期</label>
+                                <input type="date" class="w-full bg-gray-50 border border-gray-100 rounded-2xl p-4 text-sm outline-none" value="2023-11-25">
+                            </div>
+                        </div>
+
+                        <!-- 财务信息 -->
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 mb-2 uppercase">项目总金额 (元)</label>
+                            <div class="relative">
+                                <span class="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-tf">¥</span>
+                                <input type="number" placeholder="0.00" class="w-full bg-gray-50 border border-gray-100 rounded-2xl p-4 pl-8 text-lg font-black outline-none text-tf" value="15000">
+                            </div>
+                        </div>
+
+                        <!-- 定金逻辑 -->
+                        <div class="bg-blue-50/50 p-5 rounded-3xl border border-blue-100">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-sm font-bold text-gray-700">是否开启分阶段定金</span>
+                                <div class="w-10 h-5 bg-tf rounded-full relative">
+                                    <div class="absolute right-1 top-1 w-3 h-3 bg-white rounded-full"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-tf mb-1 uppercase">首笔定金金额</label>
+                                <input type="number" class="w-full bg-white border border-blue-200 rounded-xl p-3 text-sm outline-none" value="3000">
+                            </div>
+                        </div>
+
+                        <!-- 乙方信息 -->
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 mb-2 uppercase">执行方 (乙方) 姓名/单位</label>
+                            <input type="text" placeholder="您的姓名或工作室名称" class="w-full bg-gray-50 border border-gray-100 rounded-2xl p-4 text-sm outline-none" value="极客设计中心">
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <button class="w-full bg-tf-gradient text-white py-5 rounded-[2rem] font-bold shadow-lg shadow-blue-200 flex items-center justify-center gap-2">
+                            <i class="fas fa-share-nodes"></i>
+                            生成分享协议链接
+                        </button>
+                        <p class="text-center text-[10px] text-gray-400 mt-4 px-6">
+                            * 生成后请将链接发送给甲方，甲方填写姓名并支付后协议正式进入信托流程
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 10: 用户填写并支付 (接收端) -->
+        <div id="p10" class="phone-frame">
+            <div class="dynamic-island"></div>
+            <div class="status-bar mt-4">
+                <span>9:41</span>
+                <i class="fas fa-battery-full"></i>
+            </div>
+
+            <div class="h-full bg-gray-50 overflow-y-auto no-scrollbar pb-32">
+                <!-- 顶部卡片 -->
+                <div class="bg-tf-gradient pt-12 pb-20 px-6 text-white text-center">
+                    <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-white/30">
+                        <i class="fas fa-file-contract text-2xl"></i>
+                    </div>
+                    <h2 class="text-xl font-bold">待您签署并托管资金</h2>
+                    <p class="text-xs opacity-70 mt-2">乙方 [极客设计中心] 向您发起了项目协议</p>
+                </div>
+
+                <!-- 浮动表单卡片 -->
+                <div class="px-6 -mt-12">
+                    <div class="bg-white rounded-[2.5rem] shadow-xl p-6 space-y-6">
+                        <div class="border-b border-gray-50 pb-4">
+                            <h3 class="text-sm text-gray-400 font-medium">项目名称</h3>
+                            <p class="text-base font-bold text-gray-800 mt-1">臻托 TrustFulfillment 全案设计</p>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <h3 class="text-[10px] text-gray-400 font-bold uppercase">项目总计</h3>
+                                <p class="text-lg font-black text-gray-800">¥ 15,000</p>
+                            </div>
+                            <div class="text-right">
+                                <h3 class="text-[10px] text-gray-400 font-bold uppercase">本次支付 (定金)</h3>
+                                <p class="text-lg font-black text-tf">¥ 3,000</p>
+                            </div>
+                        </div>
+
+                        <hr class="border-dashed">
+
+                        <!-- 用户补充信息 -->
+                        <div>
+                            <label class="block text-xs font-bold text-gray-800 mb-2">确认您的姓名/企业名称</label>
+                            <input type="text" placeholder="点击输入您的称呼" class="w-full bg-blue-50/30 border border-blue-100 rounded-2xl p-4 text-sm outline-none ring-1 ring-blue-50">
+                        </div>
+
+                        <div class="bg-gray-50 p-4 rounded-2xl">
+                            <div class="flex items-center gap-3 mb-2">
+                                <i class="fas fa-shield-check text-tf text-sm"></i>
+                                <span class="text-xs font-bold">臻托信托权益保障</span>
+                            </div>
+                            <ul class="text-[10px] text-gray-500 space-y-1">
+                                <li>• 资金由平台第三方监管，未验收前商家无法提现</li>
+                                <li>• 平台自动生成具有法律效力的电子存证</li>
+                                <li>• 出现违约可随时申请平台干预仲裁</li>
+                            </ul>
+                        </div>
+
+                        <div class="pt-4">
+                            <button class="w-full bg-tf-gradient text-white py-5 rounded-3xl font-bold text-lg shadow-xl shadow-blue-100 flex items-center justify-center gap-2">
+                                <i class="fab fa-weixin"></i>
+                                立即支付 3,000元
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-center text-[10px] text-gray-400 mt-6 px-10">
+                    支付即代表您同意《臻托信托协议服务协议》及《电子存证授权协议》
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function scrollToPage(id) {
+            const element = document.getElementById(id);
+            element.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'center' });
+            
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(btn => {
+                if (btn.innerText.includes(id.replace('p',''))) {
+                    btn.classList.add('bg-tf', 'text-white');
+                    btn.classList.remove('bg-white', 'text-tf');
+                } else {
+                    if(!btn.classList.contains('bg-tf-gradient')) {
+                        btn.classList.remove('bg-tf', 'text-white');
+                        btn.classList.add('bg-white', 'text-tf');
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

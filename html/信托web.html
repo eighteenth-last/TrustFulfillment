@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>臻托 TrustFulfillment - Web管理后台原型</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
+        
+        :root {
+            --tf-primary: #00AFE1;
+            --tf-secondary: #0084A8;
+            --tf-light: #f0faff;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #f4f7f9;
+        }
+
+        .web-screen {
+            width: 1440px;
+            height: 900px;
+            background: #fff;
+            border: 8px solid #e5e7eb;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            flex-shrink: 0;
+            margin: 40px;
+        }
+
+        .bg-tf-gradient {
+            background: linear-gradient(135deg, var(--tf-primary) 0%, var(--tf-secondary) 100%);
+        }
+
+        .text-tf { color: var(--tf-primary); }
+        .bg-tf { background-color: var(--tf-primary); }
+        .border-tf { border-color: var(--tf-primary); }
+
+        .sidebar-item-active {
+            background: rgba(0, 175, 225, 0.1);
+            color: var(--tf-primary);
+            border-right: 4px solid var(--tf-primary);
+        }
+
+        .custom-card {
+            background: #ffffff;
+            border-radius: 16px;
+            border: 1px solid #edf2f7;
+            transition: all 0.3s ease;
+        }
+
+        .custom-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        /* 布局网格控制 */
+        .pages-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 100px 40px 40px 40px;
+            justify-content: flex-start;
+        }
+
+        /* 滚动条美化 */
+        .no-scrollbar::-webkit-scrollbar { width: 6px; }
+        .no-scrollbar::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <!-- 全局页面导航 -->
+    <div class="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md shadow-sm z-[1000] p-4 flex justify-center gap-3 overflow-x-auto no-scrollbar border-b">
+        <button onclick="scrollToWebPage('w1')" class="px-5 py-2 bg-tf text-white rounded-lg text-sm font-bold shadow-md transition transform hover:scale-105">1. 数据总览</button>
+        <button onclick="scrollToWebPage('w2')" class="px-5 py-2 bg-white text-tf border border-tf rounded-lg text-sm font-bold hover:bg-tf hover:text-white transition">2. 任务管理</button>
+        <button onclick="scrollToWebPage('w3')" class="px-5 py-2 bg-white text-tf border border-tf rounded-lg text-sm font-bold hover:bg-tf hover:text-white transition">3. 信托监控</button>
+        <button onclick="scrollToWebPage('w4')" class="px-5 py-2 bg-white text-tf border border-tf rounded-lg text-sm font-bold hover:bg-tf hover:text-white transition">4. 纠纷裁决</button>
+        <button onclick="scrollToWebPage('w5')" class="px-5 py-2 bg-white text-tf border border-tf rounded-lg text-sm font-bold hover:bg-tf hover:text-white transition">5. 商家审核</button>
+        <button onclick="scrollToWebPage('w6')" class="px-5 py-2 bg-white text-tf border border-tf rounded-lg text-sm font-bold hover:bg-tf hover:text-white transition">6. 合同云端</button>
+        <button onclick="scrollToWebPage('w7')" class="px-5 py-2 bg-white text-tf border border-tf rounded-lg text-sm font-bold hover:bg-tf hover:text-white transition">7. 系统设置</button>
+        <button onclick="scrollToWebPage('w8')" class="px-5 py-2 bg-white text-tf border border-tf rounded-lg text-sm font-bold hover:bg-tf hover:text-white transition">8. 风险监控</button>
+    </div>
+
+    <div class="pages-grid">
+
+        <!-- WEB 1: 数据总览 -->
+        <div id="w1" class="web-screen flex">
+            <div class="w-64 h-full border-r border-gray-100 flex flex-col bg-white">
+                <div class="p-8"><div class="flex items-center gap-3"><div class="w-10 h-10 bg-tf-gradient rounded-xl flex items-center justify-center text-white shadow-lg"><i class="fas fa-shield-halved"></i></div><span class="font-black text-xl tracking-tighter text-gray-800">臻托 TF</span></div></div>
+                <nav class="flex-1 px-4 space-y-2">
+                    <div class="sidebar-item-active p-4 rounded-xl flex items-center gap-3 cursor-pointer"><i class="fas fa-chart-pie w-5"></i><span class="font-bold">平台总览</span></div>
+                    <div class="text-gray-400 p-4 rounded-xl flex items-center gap-3 cursor-pointer hover:bg-gray-50 transition"><i class="fas fa-tasks w-5"></i><span>任务审批</span></div>
+                    <div class="text-gray-400 p-4 rounded-xl flex items-center gap-3 cursor-pointer hover:bg-gray-50 transition"><i class="fas fa-vault w-5"></i><span>信托资金</span></div>
+                </nav>
+            </div>
+            <div class="flex-1 h-full flex flex-col overflow-hidden bg-gray-50">
+                <header class="h-20 bg-white border-b px-8 flex items-center justify-between"><h2 class="text-lg font-bold text-gray-800">平台数据概览</h2></header>
+                <main class="p-8 overflow-y-auto no-scrollbar flex-1">
+                    <div class="grid grid-cols-4 gap-6 mb-8">
+                        <div class="custom-card p-6 border-l-4 border-tf"><p class="text-gray-400 text-xs font-bold mb-2">信托托管总额</p><h3 class="text-2xl font-black text-gray-800">¥ 12,450,200</h3><div class="mt-4 text-xs text-green-500"><i class="fas fa-arrow-up mr-1"></i> 12.5%</div></div>
+                        <div class="custom-card p-6"><p class="text-gray-400 text-xs font-bold mb-2">活跃商户</p><h3 class="text-2xl font-black text-gray-800">2,560</h3></div>
+                        <div class="custom-card p-6"><p class="text-gray-400 text-xs font-bold mb-2">争议订单率</p><h3 class="text-2xl font-black text-red-500">0.8%</h3></div>
+                        <div class="custom-card p-6 bg-tf-gradient text-white"><p class="text-white/70 text-xs font-bold mb-2">安全运行</p><h3 class="text-2xl font-black">1,458 天</h3></div>
+                    </div>
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+                        <h4 class="font-bold mb-4">资金趋势分析</h4>
+                        <div class="h-64 bg-gray-50 rounded-xl flex items-end justify-between p-4 gap-2">
+                            <div class="w-full bg-tf/20 h-[30%] rounded-t"></div><div class="w-full bg-tf/40 h-[45%] rounded-t"></div><div class="w-full bg-tf/60 h-[65%] rounded-t"></div><div class="w-full bg-tf h-[85%] rounded-t"></div><div class="w-full bg-tf/80 h-[70%] rounded-t"></div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <!-- WEB 2: 任务管理 -->
+        <div id="w2" class="web-screen flex">
+            <div class="w-64 h-full border-r bg-white">
+                <div class="p-8"><span class="font-black text-xl text-tf">臻托 TF</span></div>
+                <nav class="px-4"><div class="sidebar-item-active p-4 rounded-xl flex items-center gap-3"><i class="fas fa-tasks"></i><span class="font-bold">任务审批</span></div></nav>
+            </div>
+            <div class="flex-1 bg-gray-50 flex flex-col">
+                <header class="h-20 bg-white border-b px-8 flex items-center justify-between"><h2 class="text-lg font-bold">待处理任务 (12)</h2></header>
+                <div class="p-8 grid grid-cols-2 gap-6">
+                    <div class="custom-card p-6 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between mb-4"><span class="text-xs font-bold text-tf bg-tf/10 px-2 py-1 rounded">UI设计</span><span class="text-xs text-gray-400">2023-11-01</span></div>
+                            <h4 class="font-bold text-gray-800">电商App视觉全案</h4>
+                            <p class="text-sm text-gray-500 mt-2">包含首页、分类、个人中心等50+页面设计...</p>
+                        </div>
+                        <div class="mt-6 flex gap-2"><button class="flex-1 bg-tf text-white py-2 rounded-lg font-bold">审核通过</button><button class="flex-1 border py-2 rounded-lg text-gray-400">详情</button></div>
+                    </div>
+                    <div class="custom-card p-6 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between mb-4"><span class="text-xs font-bold text-purple-500 bg-purple-50 px-2 py-1 rounded">后端开发</span><span class="text-xs text-gray-400">2023-11-02</span></div>
+                            <h4 class="font-bold text-gray-800">Python 爬虫数据采集</h4>
+                            <p class="text-sm text-gray-500 mt-2">针对特定电商平台的价格监控及报警系统...</p>
+                        </div>
+                        <div class="mt-6 flex gap-2"><button class="flex-1 bg-tf text-white py-2 rounded-lg font-bold">审核通过</button><button class="flex-1 border py-2 rounded-lg text-gray-400">详情</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WEB 3: 信托监控 -->
+        <div id="w3" class="web-screen flex">
+            <div class="w-64 h-full border-r bg-white">
+                 <div class="p-8"><span class="font-black text-xl text-tf">臻托 TF</span></div>
+                 <nav class="px-4"><div class="sidebar-item-active p-4 rounded-xl flex items-center gap-3"><i class="fas fa-vault"></i><span class="font-bold">资金池监控</span></div></nav>
+            </div>
+            <div class="flex-1 bg-gray-50">
+                <header class="h-20 bg-white border-b px-8 flex items-center justify-between"><h2 class="text-lg font-bold">信托资金流向</h2></header>
+                <div class="p-8">
+                    <div class="grid grid-cols-3 gap-6 mb-8">
+                        <div class="bg-tf-gradient p-6 rounded-3xl text-white">
+                            <p class="text-white/60 text-xs font-bold uppercase tracking-wider">当前资金总池</p>
+                            <h2 class="text-3xl font-black mt-2">¥ 8,452,000.00</h2>
+                            <p class="text-[10px] mt-4 opacity-70">受银联及存托银行实时监管</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-3xl border border-gray-100">
+                            <p class="text-gray-400 text-xs font-bold uppercase tracking-wider">今日流入资金</p>
+                            <h2 class="text-3xl font-black mt-2 text-gray-800">¥ 1,240,000</h2>
+                            <p class="text-[10px] mt-4 text-green-500"><i class="fas fa-caret-up mr-1"></i> +15.4%</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-3xl border border-gray-100">
+                            <p class="text-gray-400 text-xs font-bold uppercase tracking-wider">待清算金额</p>
+                            <h2 class="text-3xl font-black mt-2 text-gray-800">¥ 458,200</h2>
+                            <p class="text-[10px] mt-4 text-orange-500"><i class="fas fa-clock mr-1"></i> 处理中 15 笔</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-3xl p-6 border border-gray-100">
+                        <h4 class="font-black mb-6 flex items-center gap-2"><i class="fas fa-history text-tf"></i> 实时资金流水</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-2xl">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center"><i class="fas fa-plus"></i></div>
+                                    <div><p class="text-sm font-bold">商家资金入账</p><p class="text-[10px] text-gray-400">Order: TF982347</p></div>
+                                </div>
+                                <div class="text-right text-sm font-black">+ ¥ 5,000.00</div>
+                            </div>
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-2xl">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center"><i class="fas fa-file-invoice-dollar"></i></div>
+                                    <div><p class="text-sm font-bold">乙方提现发起</p><p class="text-[10px] text-gray-400">User: 极客设计</p></div>
+                                </div>
+                                <div class="text-right text-sm font-black">- ¥ 12,000.00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WEB 4: 纠纷裁决 -->
+        <div id="w4" class="web-screen flex">
+            <div class="w-64 h-full border-r bg-white">
+                <div class="p-8 text-xl font-black text-tf">臻托 TF</div>
+                <nav class="px-4"><div class="sidebar-item-active p-4 rounded-xl flex items-center gap-3"><i class="fas fa-gavel"></i><span class="font-bold">纠纷调处中心</span></div></nav>
+            </div>
+            <div class="flex-1 bg-gray-50">
+                <header class="h-20 bg-white border-b px-8 flex items-center justify-between"><h2 class="text-lg font-bold text-red-500">纠纷待审 (3)</h2></header>
+                <div class="p-8">
+                    <div class="bg-white rounded-2xl border border-red-100 overflow-hidden">
+                        <div class="p-6 bg-red-50/50 flex justify-between items-center">
+                            <div class="flex items-center gap-3"><i class="fas fa-exclamation-triangle text-red-500"></i><span class="font-bold">案件：#DISP-8923</span></div>
+                            <span class="text-xs font-bold text-red-500">紧急处理中</span>
+                        </div>
+                        <div class="p-8 grid grid-cols-2 gap-12">
+                            <div>
+                                <h5 class="text-xs font-bold text-gray-400 uppercase mb-4 tracking-widest">甲方诉求 (申请退款)</h5>
+                                <div class="p-4 bg-gray-50 rounded-2xl text-sm leading-relaxed">
+                                    “乙方提供的Logo初稿严重不符合要求，且拒绝按照合同约定的3次修改，目前失联3天，申请全额退回信托资金。”
+                                </div>
+                                <div class="mt-4 grid grid-cols-4 gap-2">
+                                    <div class="aspect-square bg-gray-200 rounded-lg"></div><div class="aspect-square bg-gray-200 rounded-lg"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <h5 class="text-xs font-bold text-gray-400 uppercase mb-4 tracking-widest">乙方抗辩 (拒绝退款)</h5>
+                                <div class="p-4 bg-gray-50 rounded-2xl text-sm leading-relaxed">
+                                    “已按照甲方要求修改4次，聊天记录证明甲方一直在中途更改核心创意，目前的失联是因为对方辱骂我。我已完成50%工作。”
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6 border-t bg-gray-50 flex justify-end gap-3">
+                            <button class="px-6 py-2 border rounded-xl text-sm font-bold text-gray-500">人工介入调解</button>
+                            <button class="px-6 py-2 bg-red-500 text-white rounded-xl text-sm font-bold">裁定退款(信托划扣)</button>
+                            <button class="px-6 py-2 bg-tf text-white rounded-xl text-sm font-bold">裁定结算</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WEB 5: 商家审核 -->
+        <div id="w5" class="web-screen flex">
+            <div class="w-64 h-full border-r bg-white">
+                <div class="p-8 text-xl font-black text-tf">臻托 TF</div>
+                <nav class="px-4"><div class="sidebar-item-active p-4 rounded-xl flex items-center gap-3"><i class="fas fa-user-check"></i><span class="font-bold">入驻审核</span></div></nav>
+            </div>
+            <div class="flex-1 bg-gray-50">
+                <header class="h-20 bg-white border-b px-8 flex items-center justify-between"><h2 class="text-lg font-bold">商家资质核查</h2></header>
+                <main class="p-8">
+                    <div class="bg-white rounded-3xl p-8 border border-gray-100 flex gap-8 items-start">
+                        <div class="w-1/3 space-y-4">
+                            <div class="aspect-video bg-gray-100 rounded-2xl flex items-center justify-center overflow-hidden"><i class="fas fa-image text-gray-300"></i></div>
+                            <p class="text-center text-xs text-gray-400">营业执照扫描件</p>
+                            <div class="aspect-video bg-gray-100 rounded-2xl flex items-center justify-center overflow-hidden"><i class="fas fa-image text-gray-300"></i></div>
+                            <p class="text-center text-xs text-gray-400">法人身份证件</p>
+                        </div>
+                        <div class="flex-1 space-y-6">
+                            <div class="grid grid-cols-2 gap-6">
+                                <div><label class="block text-[10px] font-bold text-gray-400 uppercase">企业名称</label><p class="text-lg font-bold">杭州极限矩阵数字科技有限公司</p></div>
+                                <div><label class="block text-[10px] font-bold text-gray-400 uppercase">统一社会信用代码</label><p class="text-lg font-bold tracking-widest">91330101MA28B...</p></div>
+                                <div><label class="block text-[10px] font-bold text-gray-400 uppercase">所属行业</label><p class="text-lg font-bold">互联网/软件开发</p></div>
+                                <div><label class="block text-[10px] font-bold text-gray-400 uppercase">注册资金</label><p class="text-lg font-bold">¥ 500.00 万</p></div>
+                            </div>
+                            <hr>
+                            <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100">
+                                <h6 class="text-sm font-black text-tf mb-2">天眼查/企查查实时校验结果</h6>
+                                <p class="text-xs text-gray-600"><i class="fas fa-check-circle text-green-500 mr-1"></i> 企业存续状态正常</p>
+                                <p class="text-xs text-gray-600 mt-1"><i class="fas fa-check-circle text-green-500 mr-1"></i> 无失信被执行记录</p>
+                            </div>
+                            <div class="flex gap-4 pt-4">
+                                <button class="flex-1 bg-tf text-white py-4 rounded-2xl font-black shadow-lg shadow-tf/20">审核通过并授权入驻</button>
+                                <button class="px-8 border border-red-200 text-red-500 rounded-2xl font-bold">驳回申请</button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <!-- WEB 6: 合同云端 -->
+        <div id="w6" class="web-screen flex">
+            <div class="w-64 h-full border-r bg-white">
+                <div class="p-8 text-xl font-black text-tf">臻托 TF</div>
+                <nav class="px-4"><div class="sidebar-item-active p-4 rounded-xl flex items-center gap-3"><i class="fas fa-cloud"></i><span class="font-bold">云合同库</span></div></nav>
+            </div>
+            <div class="flex-1 bg-gray-50 flex flex-col">
+                <header class="h-20 bg-white border-b px-8 flex items-center justify-between"><h2 class="text-lg font-bold text-gray-800">全量合规合同库</h2></header>
+                <div class="p-8">
+                    <div class="grid grid-cols-4 gap-4">
+                        <div class="bg-white p-4 rounded-2xl border flex items-center gap-4 hover:border-tf transition cursor-pointer">
+                            <i class="fas fa-file-pdf text-red-500 text-2xl"></i>
+                            <div class="overflow-hidden">
+                                <p class="text-sm font-bold truncate">软件委托开发协议_v1.2.pdf</p>
+                                <p class="text-[10px] text-gray-400">HASH: 8f2a...c32d</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-2xl border flex items-center gap-4 hover:border-tf transition cursor-pointer">
+                            <i class="fas fa-file-contract text-tf text-2xl"></i>
+                            <div class="overflow-hidden">
+                                <p class="text-sm font-bold truncate">UI视觉外包合同模板.docx</p>
+                                <p class="text-[10px] text-gray-400">最后更新: 2天前</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WEB 7: 系统设置 -->
+        <div id="w7" class="web-screen flex">
+            <div class="w-64 h-full border-r bg-white">
+                <div class="p-8 text-xl font-black text-tf">臻托 TF</div>
+                <nav class="px-4"><div class="sidebar-item-active p-4 rounded-xl flex items-center gap-3"><i class="fas fa-cog"></i><span class="font-bold">全局配置</span></div></nav>
+            </div>
+            <div class="flex-1 bg-gray-50">
+                <header class="h-20 bg-white border-b px-8 flex items-center justify-between"><h2 class="text-lg font-bold">系统参数设定</h2></header>
+                <div class="p-8">
+                    <div class="max-w-2xl bg-white rounded-3xl shadow-sm border p-8 space-y-8">
+                        <div>
+                            <label class="block text-xs font-black text-gray-400 uppercase mb-4 tracking-widest">信托平台费率配置 (%)</label>
+                            <div class="grid grid-cols-2 gap-6">
+                                <div><p class="text-xs text-gray-500 mb-2">默认交易费率</p><input type="text" value="3.5%" class="w-full border rounded-xl p-3 font-bold text-tf"></div>
+                                <div><p class="text-xs text-gray-500 mb-2">仲裁服务费率</p><input type="text" value="1.5%" class="w-full border rounded-xl p-3 font-bold text-tf"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-black text-gray-400 uppercase mb-4 tracking-widest">资金安全风控阈值</label>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-2xl">
+                                    <span class="text-sm font-bold">单笔支付拦截上限 (¥)</span>
+                                    <input type="number" value="200000" class="w-32 bg-transparent text-right font-black outline-none">
+                                </div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-tf text-white py-4 rounded-2xl font-black shadow-lg">更新全局配置</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WEB 8: 风险监控 -->
+        <div id="w8" class="web-screen flex">
+            <div class="w-64 h-full border-r bg-white">
+                <div class="p-8 text-xl font-black text-tf">臻托 TF</div>
+                <nav class="px-4"><div class="sidebar-item-active p-4 rounded-xl flex items-center gap-3"><i class="fas fa-shield-virus"></i><span class="font-bold">风险雷达</span></div></nav>
+            </div>
+            <div class="flex-1 bg-gray-50 overflow-hidden flex flex-col">
+                <header class="h-20 bg-white border-b px-8 flex items-center justify-between"><h2 class="text-lg font-bold text-tf">实时风险态势图</h2></header>
+                <div class="flex-1 p-8 grid grid-cols-3 gap-6">
+                    <div class="col-span-2 bg-white rounded-3xl p-8 border relative overflow-hidden">
+                        <h4 class="font-black mb-4">异常账户监控图谱</h4>
+                        <div class="h-full flex items-center justify-center">
+                            <div class="w-64 h-64 border-4 border-dashed border-tf/20 rounded-full flex items-center justify-center relative animate-pulse">
+                                <div class="w-32 h-32 border-4 border-tf rounded-full flex items-center justify-center">
+                                    <i class="fas fa-radar text-4xl text-tf"></i>
+                                </div>
+                                <div class="absolute top-0 right-10 w-4 h-4 bg-red-500 rounded-full shadow-lg shadow-red-200"></div>
+                                <div class="absolute bottom-10 left-0 w-3 h-3 bg-red-500 rounded-full shadow-lg"></div>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-8 left-8 text-[10px] text-gray-400">正在扫描 4,592 个在线链路...</div>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="bg-red-50 p-6 rounded-3xl border border-red-100">
+                            <h5 class="text-red-600 font-black text-sm mb-4">高危警报 (2)</h5>
+                            <div class="space-y-3">
+                                <div class="p-3 bg-white rounded-xl text-[10px] shadow-sm">
+                                    <p class="font-bold text-gray-800">异地多点频繁提现</p>
+                                    <p class="text-gray-400 mt-1">商户ID: M-4529 | 风险分: 98</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-3xl border">
+                            <h5 class="font-black text-sm mb-4">风控统计</h5>
+                            <div class="space-y-4">
+                                <div class="flex justify-between text-xs"><span>拦截非法请求</span><span class="font-bold">12,402</span></div>
+                                <div class="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden"><div class="bg-tf h-full w-[85%]"></div></div>
+                                <div class="flex justify-between text-xs"><span>存证一致性校验</span><span class="font-bold">100%</span></div>
+                                <div class="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden"><div class="bg-green-500 h-full w-full"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function scrollToWebPage(id) {
+            const element = document.getElementById(id);
+            element.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'center' });
+            
+            // 按钮高亮逻辑
+            const buttons = document.querySelectorAll('.fixed button');
+            buttons.forEach(btn => {
+                if (btn.innerText.includes(id.replace('w',''))) {
+                    btn.classList.add('bg-tf', 'text-white');
+                    btn.classList.remove('bg-white', 'text-tf');
+                } else {
+                    btn.classList.remove('bg-tf', 'text-white');
+                    btn.classList.add('bg-white', 'text-tf');
+                }
+            });
+        }
+
+        // 初始化第一个按钮的状态
+        window.onload = function() {
+            scrollToWebPage('w1');
+        }
+    </script>
+</body>
+</html>

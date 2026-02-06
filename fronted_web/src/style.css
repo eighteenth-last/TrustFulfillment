@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+/* Tailwind CSS v4 主题配置 */
+@theme {
+  --color-tf: #00AFE1;
+  --color-tf-light: #f0faff;
+  --color-tf-dark: #0084A8;
+}
+
+body {
+  @apply bg-slate-50 text-slate-800;
+  font-family: 'Inter', 'PingFang SC', sans-serif;
+  margin: 0;
+}
+
+/* 品牌渐变背景卡片 */
+.card-brand {
+  background: linear-gradient(135deg, var(--color-tf) 0%, var(--color-tf-dark) 100%);
+  box-shadow: 0 25px 50px -12px rgba(0, 175, 225, 0.25);
+  color: white;
+}

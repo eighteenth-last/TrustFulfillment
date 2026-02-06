@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+body {
+  @apply bg-gray-50 text-gray-800;
+  font-family: 'Inter', 'PingFang SC', sans-serif;
+  margin: 0;
+}
+
+/* 隐藏滚动条但保留滚动功能 */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}

@@ -1,0 +1,133 @@
+@charset "UTF-8";
+/* 主题变量 */
+/* 圆角 */
+/* 间距 */
+.page.data-v-ccb247a6 {
+  min-height: 100vh;
+  background: #f5f7fa;
+}
+.tabs.data-v-ccb247a6 {
+  display: flex;
+  background: #fff;
+  padding: 0 32rpx;
+}
+.tab-item.data-v-ccb247a6 {
+  flex: 1;
+  text-align: center;
+  padding: 32rpx 0;
+  font-size: 28rpx;
+  color: #666;
+  position: relative;
+}
+.tab-item.active.data-v-ccb247a6 {
+  color: #00AFE1;
+  font-weight: 600;
+}
+.tab-item.active.data-v-ccb247a6::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  width: 60rpx;
+  height: 6rpx;
+  background: #00AFE1;
+  border-radius: 3rpx;
+}
+.contract-scroll.data-v-ccb247a6 {
+  height: calc(100vh - 88rpx);
+  padding: 32rpx;
+}
+.contract-list.data-v-ccb247a6 {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+.contract-card.data-v-ccb247a6 {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.05);
+}
+.contract-header.data-v-ccb247a6 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+.contract-title.data-v-ccb247a6 {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  flex: 1;
+}
+.contract-status.data-v-ccb247a6 {
+  padding: 8rpx 16rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+}
+.contract-status.status-0.data-v-ccb247a6 {
+  background: rgba(156, 163, 175, 0.1);
+  color: #9ca3af;
+}
+.contract-status.status-1.data-v-ccb247a6 {
+  background: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+}
+.contract-status.status-2.data-v-ccb247a6 {
+  background: rgba(249, 115, 22, 0.1);
+  color: #f97316;
+}
+.contract-status.status-3.data-v-ccb247a6 {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+}
+.contract-status.status-4.data-v-ccb247a6 {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+.contract-info.data-v-ccb247a6 {
+  margin-bottom: 24rpx;
+}
+.info-row.data-v-ccb247a6 {
+  display: flex;
+  justify-content: space-between;
+  padding: 12rpx 0;
+  font-size: 26rpx;
+}
+.info-label.data-v-ccb247a6 {
+  color: #999;
+}
+.info-value.data-v-ccb247a6 {
+  color: #333;
+}
+.info-value.amount.data-v-ccb247a6 {
+  color: #00AFE1;
+  font-weight: 600;
+}
+.contract-footer.data-v-ccb247a6 {
+  border-top: 1rpx solid #f5f5f5;
+  padding-top: 24rpx;
+  text-align: right;
+}
+.view-btn.data-v-ccb247a6 {
+  font-size: 26rpx;
+  color: #00AFE1;
+  font-weight: 600;
+}
+.empty.data-v-ccb247a6 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 0;
+}
+.empty-icon.data-v-ccb247a6 {
+  font-size: 120rpx;
+  margin-bottom: 24rpx;
+}
+.empty-text.data-v-ccb247a6 {
+  font-size: 28rpx;
+  color: #999;
+}

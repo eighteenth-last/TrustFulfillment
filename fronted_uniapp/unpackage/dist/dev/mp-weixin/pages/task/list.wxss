@@ -1,0 +1,122 @@
+@charset "UTF-8";
+/* 主题变量 */
+/* 圆角 */
+/* 间距 */
+.page.data-v-1d5416bf {
+  min-height: 100vh;
+  background: #f0f4f8;
+  display: flex;
+  flex-direction: column;
+}
+.category-scroll.data-v-1d5416bf {
+  white-space: nowrap;
+  background: #fff;
+  padding: 24rpx 32rpx;
+}
+.category-list.data-v-1d5416bf {
+  display: inline-flex;
+  gap: 24rpx;
+}
+.category-item.data-v-1d5416bf {
+  padding: 16rpx 32rpx;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  color: #666;
+  background: #f5f5f5;
+  flex-shrink: 0;
+}
+.category-item.active.data-v-1d5416bf {
+  background: #00AFE1;
+  color: #fff;
+}
+.task-scroll.data-v-1d5416bf {
+  flex: 1;
+  padding: 0;
+}
+.task-list.data-v-1d5416bf {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+  padding: 32rpx 32rpx;
+}
+.task-card.data-v-1d5416bf {
+  background: #fff;
+  border-radius: 48rpx;
+  padding: 32rpx 28rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.05);
+}
+.task-header.data-v-1d5416bf {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+.task-title.data-v-1d5416bf {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  flex: 1;
+  margin-right: 16rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.task-price.data-v-1d5416bf {
+  font-size: 36rpx;
+  font-weight: 900;
+  color: #00AFE1;
+  flex-shrink: 0;
+}
+.task-meta.data-v-1d5416bf {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 16rpx;
+}
+.task-category.data-v-1d5416bf {
+  font-size: 22rpx;
+  padding: 6rpx 16rpx;
+  border-radius: 8rpx;
+  background: rgba(139, 92, 246, 0.1);
+  color: #8b5cf6;
+  flex-shrink: 0;
+}
+.task-time.data-v-1d5416bf {
+  font-size: 24rpx;
+  color: #999;
+}
+.task-tags.data-v-1d5416bf {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 16rpx;
+}
+.tag.data-v-1d5416bf {
+  font-size: 22rpx;
+  padding: 8rpx 16rpx;
+  border-radius: 8rpx;
+  border: 2rpx solid #eee;
+  color: #999;
+}
+.tag.tag-primary.data-v-1d5416bf {
+  border-color: rgba(0, 175, 225, 0.3);
+  color: #00AFE1;
+}
+.task-footer.data-v-1d5416bf {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.bid-btn.data-v-1d5416bf {
+  background: #00AFE1;
+  color: #fff;
+  font-size: 26rpx;
+  font-weight: 600;
+  padding: 16rpx 32rpx;
+  border-radius: 24rpx;
+}
+.loading-more.data-v-1d5416bf, .no-more.data-v-1d5416bf {
+  text-align: center;
+  padding: 32rpx 0;
+  color: #999;
+  font-size: 26rpx;
+}

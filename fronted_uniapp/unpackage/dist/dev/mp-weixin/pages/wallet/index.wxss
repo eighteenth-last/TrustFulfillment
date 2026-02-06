@@ -1,0 +1,134 @@
+@charset "UTF-8";
+/* 主题变量 */
+/* 圆角 */
+/* 间距 */
+.page.data-v-2253ba35 {
+  min-height: 100vh;
+  background: #f0f4f8;
+  padding: 32rpx;
+}
+.balance-card.data-v-2253ba35 {
+  background: linear-gradient(135deg, #00AFE1 0%, #0084A8 100%);
+  border-radius: 64rpx;
+  padding: 64rpx;
+  color: #fff;
+  box-shadow: 0 16rpx 48rpx rgba(0, 175, 225, 0.3);
+  margin-bottom: 48rpx;
+}
+.balance-label.data-v-2253ba35 {
+  font-size: 28rpx;
+  opacity: 0.8;
+  display: block;
+  margin-bottom: 16rpx;
+}
+.balance-value.data-v-2253ba35 {
+  font-size: 72rpx;
+  font-weight: 900;
+  display: block;
+  margin-bottom: 48rpx;
+}
+.balance-actions.data-v-2253ba35 {
+  display: flex;
+  gap: 24rpx;
+}
+.balance-btn.data-v-2253ba35 {
+  flex: 1;
+  text-align: center;
+  padding: 28rpx;
+  background: #fff;
+  color: #00AFE1;
+  font-size: 30rpx;
+  font-weight: 600;
+  border-radius: 32rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.1);
+}
+.balance-btn.outline.data-v-2253ba35 {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border: 2rpx solid rgba(255, 255, 255, 0.5);
+  box-shadow: none;
+}
+.section.data-v-2253ba35 {
+  background: #fff;
+  border-radius: 48rpx;
+  padding: 40rpx;
+  margin-bottom: 32rpx;
+}
+.section-title.data-v-2253ba35 {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  display: block;
+  margin-bottom: 32rpx;
+}
+.record-list.data-v-2253ba35 {
+  display: flex;
+  flex-direction: column;
+  gap: 32rpx;
+}
+.record-item.data-v-2253ba35 {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+}
+.record-icon.data-v-2253ba35 {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+}
+.record-icon.freeze.data-v-2253ba35 {
+  background: rgba(0, 175, 225, 0.1);
+}
+.record-icon.release.data-v-2253ba35 {
+  background: rgba(34, 197, 94, 0.1);
+}
+.record-info.data-v-2253ba35 {
+  flex: 1;
+}
+.record-title.data-v-2253ba35 {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  display: block;
+}
+.record-time.data-v-2253ba35 {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+.record-amount.data-v-2253ba35 {
+  font-size: 30rpx;
+  font-weight: 700;
+}
+.record-amount.freeze.data-v-2253ba35 {
+  color: #f59e0b;
+}
+.record-amount.release.data-v-2253ba35 {
+  color: #22c55e;
+}
+.safe-tips.data-v-2253ba35 {
+  background: #fff;
+  border-radius: 48rpx;
+  padding: 40rpx;
+}
+.tips-title.data-v-2253ba35 {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  display: block;
+  margin-bottom: 24rpx;
+}
+.tips-list.data-v-2253ba35 {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+.tips-item.data-v-2253ba35 {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.6;
+}

@@ -1,0 +1,89 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/trust_fulfillment?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: qwer4321
+
+  # Redis 配置
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password:
+      database: 0
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+          max-wait: -1ms
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# Sa-Token 配置
+sa-token:
+  token-name: Authorization
+  timeout: 86400
+  active-timeout: -1
+  is-concurrent: true
+  is-share: false
+  token-style: uuid
+  is-log: false
+
+# 短信服务配置
+sms:
+  # 是否开启模拟模式 (开发环境设为true，验证码打印在日志中)
+  mock-mode: true
+  # 验证码有效期 (秒)
+  code-expire-seconds: 300
+  # 每日发送上限
+  day-limit: 10
+  # 阿里云短信配置 (生产环境需要填写真实值)
+  aliyun:
+    access-key-id: ${SMS_ACCESS_KEY_ID:}
+    access-key-secret: ${SMS_ACCESS_KEY_SECRET:}
+    # TODO: 替换为你在阿里云短信控制台申请的真实签名名称（当前"臻托"不存在）
+    sign-name: 臻托
+    # 已更新为真实模板CODE
+    template-code: SMS_331630157
+
+# 微信小程序配置
+wechat:
+  mp:
+    # 是否开启模拟模式 (开发环境设为true)
+    mock-mode: true
+    # 小程序AppID (生产环境需要填写真实值)
+    appid: ${WECHAT_MP_APPID:}
+    # 小程序AppSecret
+    secret: ${WECHAT_MP_SECRET:}
+
+# MinIO 对象存储配置
+minio:
+  endpoint: http://localhost:9000
+  access-key: minioadmin
+  secret-key: minioadmin
+  bucket-name: trustfulfillment
+  # 文件访问地址前缀 (如果有CDN或代理，可修改此项)
+  url-prefix: http://localhost:9000/trustfulfillment
+
+# 文件上传配置
+spring.servlet.multipart:
+  max-file-size: 50MB
+  max-request-size: 100MB

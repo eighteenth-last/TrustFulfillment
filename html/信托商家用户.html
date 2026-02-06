@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>臻托 TrustFulfillment - 完整交互原型 (整合版)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
+        
+        :root {
+            --tf-primary: #00AFE1;
+            --tf-secondary: #0084A8;
+            --tf-bg: #F8FAFC;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #f1f5f9;
+            overflow-x: hidden;
+        }
+
+        .web-screen {
+            width: 1440px;
+            height: 900px;
+            background: var(--tf-bg);
+            border: 8px solid #e2e8f0;
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 40px 60px -15px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+            margin: 40px auto;
+        }
+
+        .bg-tf-gradient {
+            background: linear-gradient(135deg, var(--tf-primary) 0%, var(--tf-secondary) 100%);
+        }
+
+        .text-tf { color: var(--tf-primary); }
+        .bg-tf { background-color: var(--tf-primary); }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 175, 225, 0.1);
+        }
+
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 25px -5px rgba(0, 175, 225, 0.1);
+        }
+
+        .pages-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 100px;
+            padding-bottom: 100px;
+        }
+
+        .nav-active {
+            color: var(--tf-primary);
+            position: relative;
+        }
+        .nav-active::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--tf-primary);
+            border-radius: 2px;
+        }
+
+        /* 隐藏滚动条但保留功能 */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .btn-toggle {
+            transition: all 0.2s;
+        }
+        .btn-toggle.active {
+            background-color: var(--tf-primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 175, 225, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 全局控制中心 (置顶) -->
+    <div class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md shadow-lg z-[2000] p-4 flex justify-between items-center px-12 border-b border-gray-100">
+        <div class="flex items-center gap-6">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-tf-gradient rounded-lg flex items-center justify-center text-white"><i class="fas fa-shield-halved text-sm"></i></div>
+                <span class="font-black text-xl text-gray-800">臻托 TrustFulfillment</span>
+            </div>
+            <div class="h-6 w-px bg-gray-200"></div>
+            <div class="bg-gray-100 p-1 rounded-xl flex gap-1">
+                <button onclick="scrollToPage('u1')" id="btn-u" class="px-6 py-2 rounded-lg text-xs font-bold btn-toggle active">用户 (甲方)</button>
+                <button onclick="scrollToPage('m1')" id="btn-m" class="px-6 py-2 rounded-lg text-xs font-bold btn-toggle text-gray-500">商家 (乙方)</button>
+            </div>
+        </div>
+        <div class="flex gap-2">
+            <button onclick="scrollToPage('u2')" class="px-4 py-2 bg-slate-50 text-slate-600 rounded-lg text-[11px] font-bold border border-gray-200 hover:border-tf hover:text-tf transition">快速发布</button>
+            <button onclick="scrollToPage('u3')" class="px-4 py-2 bg-slate-50 text-slate-600 rounded-lg text-[11px] font-bold border border-gray-200 hover:border-tf hover:text-tf transition">合同查验</button>
+            <button onclick="scrollToPage('m2')" class="px-4 py-2 bg-slate-50 text-slate-600 rounded-lg text-[11px] font-bold border border-gray-200 hover:border-tf hover:text-tf transition">工作台交付</button>
+            <button onclick="scrollToPage('m3')" class="px-4 py-2 bg-slate-50 text-slate-600 rounded-lg text-[11px] font-bold border border-gray-200 hover:border-tf hover:text-tf transition">财务结算</button>
+        </div>
+    </div>
+
+    <div class="pages-container">
+
+        <!-- [U1] 用户首页 (甲方) -->
+        <div id="u1" class="web-screen flex flex-col">
+            <nav class="h-20 glass-nav px-12 flex items-center justify-between sticky top-0 z-10">
+                <div class="flex items-center gap-10">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-tf-gradient rounded-lg flex items-center justify-center text-white"><i class="fas fa-user-shield text-sm"></i></div>
+                        <span class="font-black text-xl text-gray-800 tracking-tight">用户端 Portal</span>
+                    </div>
+                    <div class="flex gap-8 text-sm font-bold text-gray-500">
+                        <a href="#" class="nav-active">工作台</a>
+                        <a href="#" class="hover:text-tf">我的项目</a>
+                        <a href="#" class="hover:text-tf">资金存证</a>
+                    </div>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full text-xs font-bold">
+                        <i class="fas fa-wallet text-tf"></i>
+                        <span class="text-gray-400">可用余额:</span>
+                        <span class="text-gray-800 font-black">¥ 45,000.00</span>
+                    </div>
+                    <div class="w-10 h-10 bg-tf-gradient rounded-full border-2 border-white shadow-sm"></div>
+                </div>
+            </nav>
+            <main class="flex-1 overflow-y-auto p-12 space-y-10 no-scrollbar">
+                <div class="bg-tf-gradient rounded-[32px] p-12 text-white flex justify-between items-center relative overflow-hidden">
+                    <div class="relative z-10">
+                        <h1 class="text-4xl font-black mb-4">开启信托保障，让项目更安全。</h1>
+                        <p class="text-white/70 mb-8 max-w-md">臻托通过银行级的资金存托协议，确保每一分投入都在看到成果后才进行结算。</p>
+                        <button onclick="scrollToPage('u2')" class="bg-white text-tf px-8 py-4 rounded-2xl font-black shadow-xl hover:scale-105 transition">立刻发布新项目</button>
+                    </div>
+                    <div class="w-64 h-64 bg-white/10 rounded-full blur-3xl absolute -right-20 -top-20"></div>
+                </div>
+                <div class="grid grid-cols-4 gap-6">
+                    <div class="bg-white p-6 rounded-[24px] shadow-sm border border-gray-100 card-hover">
+                        <div class="w-12 h-12 bg-blue-50 text-tf rounded-xl flex items-center justify-center mb-4"><i class="fas fa-paper-plane"></i></div>
+                        <p class="text-[10px] text-gray-400 font-bold uppercase mb-1">正在进行</p>
+                        <h4 class="text-2xl font-black">04 <span class="text-xs font-normal text-gray-400">个项目</span></h4>
+                    </div>
+                    <div class="bg-white p-6 rounded-[24px] shadow-sm border border-gray-100 card-hover">
+                        <div class="w-12 h-12 bg-orange-50 text-orange-500 rounded-xl flex items-center justify-center mb-4"><i class="fas fa-lock"></i></div>
+                        <p class="text-[10px] text-gray-400 font-bold uppercase mb-1">托管中资金</p>
+                        <h4 class="text-2xl font-black">¥ 82,000</h4>
+                    </div>
+                    <div class="bg-white p-6 rounded-[24px] shadow-sm border border-gray-100 card-hover">
+                        <div class="w-12 h-12 bg-green-50 text-green-500 rounded-xl flex items-center justify-center mb-4"><i class="fas fa-check-circle"></i></div>
+                        <p class="text-[10px] text-gray-400 font-bold uppercase mb-1">已完结</p>
+                        <h4 class="text-2xl font-black">12 <span class="text-xs font-normal text-gray-400">个</span></h4>
+                    </div>
+                    <div class="bg-white p-6 rounded-[24px] shadow-sm border border-gray-100 card-hover">
+                        <div class="w-12 h-12 bg-purple-50 text-purple-500 rounded-xl flex items-center justify-center mb-4"><i class="fas fa-gavel"></i></div>
+                        <p class="text-[10px] text-gray-400 font-bold uppercase mb-1">投诉维权</p>
+                        <h4 class="text-2xl font-black">0 <span class="text-xs font-normal text-gray-400">个</span></h4>
+                    </div>
+                </div>
+                <section>
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-black text-gray-800">进行中的托管项目</h3>
+                        <span class="text-tf text-sm font-bold cursor-pointer">管理全部项目 <i class="fas fa-chevron-right ml-1"></i></span>
+                    </div>
+                    <div class="bg-white p-6 rounded-[24px] shadow-sm border flex items-center justify-between card-hover">
+                        <div class="flex items-center gap-6">
+                            <div class="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-tf text-2xl font-black">U</div>
+                            <div>
+                                <h5 class="font-black text-gray-800">官方管理系统 UI/UX 全案设计</h5>
+                                <div class="flex gap-4 mt-1">
+                                    <span class="text-xs text-gray-400">服务商: 极客工作室</span>
+                                    <span class="text-xs text-gray-400">已托管阶段: 1/3</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-10">
+                            <div class="text-right">
+                                <p class="text-[10px] text-gray-400 font-bold uppercase mb-1">当前状态</p>
+                                <span class="px-3 py-1 bg-tf/10 text-tf text-[10px] font-bold rounded-full">待验收阶段一</span>
+                            </div>
+                            <button onclick="scrollToPage('u3')" class="bg-tf text-white px-6 py-3 rounded-xl font-bold shadow-lg shadow-tf/20">详情/查证</button>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- [U2] 发布任务 (甲方) -->
+        <div id="u2" class="web-screen bg-white overflow-y-auto no-scrollbar">
+            <div class="max-w-4xl mx-auto py-20 px-12">
+                <div class="flex items-center gap-4 mb-12">
+                    <button onclick="scrollToPage('u1')" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 hover:text-tf transition"><i class="fas fa-arrow-left"></i></button>
+                    <div>
+                        <h2 class="text-3xl font-black text-gray-800">发起信托托管任务</h2>
+                        <p class="text-gray-400 text-sm">设定明确的交付阶段，保障资金安全拨付。</p>
+                    </div>
+                </div>
+                <div class="space-y-12">
+                    <div class="space-y-4">
+                        <label class="block text-xs font-black text-tf uppercase tracking-widest">1. 项目基本需求</label>
+                        <input type="text" placeholder="例如：跨境支付系统前端组件库开发" class="w-full border-b-2 border-gray-100 py-4 text-xl font-bold outline-none focus:border-tf transition">
+                        <textarea placeholder="描述交付标准与技术规格..." class="w-full border-b-2 border-gray-100 py-4 h-32 outline-none focus:border-tf transition"></textarea>
+                    </div>
+                    <div class="space-y-6">
+                        <label class="block text-xs font-black text-tf uppercase tracking-widest">2. 资金托管计划 (按阶段拨付)</label>
+                        <div class="bg-slate-50 p-8 rounded-[32px] space-y-4 border-2 border-dashed border-gray-200">
+                            <div class="flex items-center gap-4">
+                                <span class="w-6 h-6 bg-tf text-white rounded-full flex items-center justify-center text-[10px] font-bold">1</span>
+                                <input type="text" value="项目开工启动金" class="bg-transparent border-b flex-1 py-2 font-bold text-sm">
+                                <input type="text" value="¥ 2,000" class="bg-transparent border-b w-32 py-2 font-black text-tf text-right">
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="w-6 h-6 bg-tf text-white rounded-full flex items-center justify-center text-[10px] font-bold">2</span>
+                                <input type="text" value="核心功能测试交付" class="bg-transparent border-b flex-1 py-2 font-bold text-sm">
+                                <input type="text" value="¥ 8,000" class="bg-transparent border-b w-32 py-2 font-black text-tf text-right">
+                            </div>
+                            <button class="w-full py-4 text-tf text-xs font-bold border border-tf/20 rounded-2xl hover:bg-tf/5 transition">+ 添加结算节点</button>
+                        </div>
+                    </div>
+                    <div class="p-8 bg-tf-gradient rounded-[32px] text-white flex justify-between items-center shadow-xl shadow-tf/20">
+                        <div>
+                            <p class="text-white/60 text-xs font-bold uppercase mb-1">托管总金额</p>
+                            <h3 class="text-3xl font-black">¥ 10,000.00</h3>
+                        </div>
+                        <button class="bg-white text-tf px-10 py-4 rounded-2xl font-black shadow-lg">确认并进入托管</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- [U3] 存证与司法查验 (甲方) -->
+        <div id="u3" class="web-screen flex flex-col">
+            <header class="h-20 bg-white border-b px-12 flex items-center justify-between shrink-0">
+                <h2 class="font-black text-xl text-gray-800">数字存证查验中心</h2>
+                <div class="flex gap-4">
+                    <span class="text-xs text-green-500 font-bold bg-green-50 px-3 py-1 rounded-full border border-green-100"><i class="fas fa-shield-check mr-1"></i> 司法同步正常</span>
+                </div>
+            </header>
+            <main class="flex-1 overflow-y-auto p-12 bg-slate-50 no-scrollbar">
+                <div class="max-w-5xl mx-auto space-y-8">
+                    <div class="bg-white p-10 rounded-[40px] shadow-sm border border-gray-100">
+                        <div class="flex justify-between items-start mb-10">
+                            <div>
+                                <h3 class="text-2xl font-black text-gray-800">合同与交付存证凭证</h3>
+                                <p class="text-gray-400 text-sm mt-1">此数据已通过臻托分布式存证节点同步至互联网法院司法区块链</p>
+                            </div>
+                            <button class="bg-tf/5 text-tf px-6 py-2 rounded-xl text-xs font-bold border border-tf/10">导出取证报告</button>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="p-6 bg-slate-50 rounded-3xl border border-dashed border-tf/20 flex justify-between items-center">
+                                <div class="flex items-center gap-6">
+                                    <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-tf text-2xl shadow-sm"><i class="fas fa-file-pdf"></i></div>
+                                    <div>
+                                        <p class="font-black text-gray-800">官方管理系统_委托合同_V2.pdf</p>
+                                        <p class="text-[10px] text-gray-400 font-mono mt-1">HASH: 77a1b...e92f2</p>
+                                    </div>
+                                </div>
+                                <span class="text-[10px] font-black bg-green-500 text-white px-3 py-1 rounded-full shadow-lg shadow-green-500/20">已存证</span>
+                            </div>
+                            <div class="grid grid-cols-3 gap-6">
+                                <div class="bg-gray-50 p-5 rounded-2xl">
+                                    <p class="text-[10px] text-gray-400 font-bold uppercase mb-2">存证机构</p>
+                                    <p class="text-xs font-bold text-gray-700">杭州互联网法院</p>
+                                </div>
+                                <div class="bg-gray-50 p-5 rounded-2xl">
+                                    <p class="text-[10px] text-gray-400 font-bold uppercase mb-2">区块高度</p>
+                                    <p class="text-xs font-bold text-gray-700">#19,234,011</p>
+                                </div>
+                                <div class="bg-gray-50 p-5 rounded-2xl">
+                                    <p class="text-[10px] text-gray-400 font-bold uppercase mb-2">上链时间</p>
+                                    <p class="text-xs font-bold text-gray-700">2023-12-01 10:22:45</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- [M1] 商家首页 (乙方) -->
+        <div id="m1" class="web-screen flex flex-col">
+            <nav class="h-20 bg-white px-12 flex items-center justify-between border-b sticky top-0 z-10 shrink-0">
+                <div class="flex items-center gap-10">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-tf-gradient rounded-lg flex items-center justify-center text-white"><i class="fas fa-briefcase text-sm"></i></div>
+                        <span class="font-black text-xl text-gray-800">商家 Workspace</span>
+                    </div>
+                    <div class="flex gap-8 text-sm font-bold text-gray-500">
+                        <a href="#" class="nav-active">工作台</a>
+                        <a href="#" class="hover:text-tf">任务市场</a>
+                        <a href="#" class="hover:text-tf">财务结算</a>
+                    </div>
+                </div>
+                <div class="flex items-center gap-6">
+                    <span class="text-[10px] px-3 py-1 bg-green-50 text-green-600 rounded-full font-bold">已认证企业</span>
+                    <i class="far fa-bell text-gray-300"></i>
+                    <div class="w-10 h-10 bg-slate-100 rounded-full border"></div>
+                </div>
+            </nav>
+            <main class="flex-1 overflow-y-auto bg-slate-50/50 p-12 no-scrollbar">
+                <div class="flex gap-8">
+                    <div class="flex-1 space-y-8">
+                        <div class="bg-white p-10 rounded-[40px] shadow-sm border border-gray-100">
+                            <h3 class="font-black text-lg mb-8">进行中的任务 (3)</h3>
+                            <div class="space-y-4">
+                                <div class="p-6 border border-gray-100 rounded-3xl flex justify-between items-center group hover:border-tf transition bg-gray-50/30">
+                                    <div class="flex gap-5">
+                                        <div class="w-12 h-12 bg-tf/5 rounded-2xl flex items-center justify-center text-tf"><i class="fas fa-terminal"></i></div>
+                                        <div>
+                                            <p class="font-black text-gray-800">官方管理系统 UI 设计</p>
+                                            <p class="text-[10px] text-gray-400 mt-1">甲方: 臻托项目组 | 当前节点: 阶段一交付</p>
+                                        </div>
+                                    </div>
+                                    <button onclick="scrollToPage('m2')" class="bg-tf text-white px-6 py-2 rounded-xl text-xs font-bold shadow-lg shadow-tf/20">提交交付</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="bg-white p-8 rounded-[40px] border border-gray-100 card-hover">
+                                <div class="flex justify-between items-start mb-4">
+                                    <span class="text-[10px] font-black bg-orange-50 text-orange-500 px-3 py-1 rounded-full">高预算推荐</span>
+                                    <h5 class="text-tf font-black text-lg">¥ 25,000</h5>
+                                </div>
+                                <h4 class="font-black text-gray-800">跨境支付组件库定制</h4>
+                                <p class="text-xs text-gray-400 mt-2 line-clamp-2">基于 React 的高度可定制化金融组件库开发，需满足信托托管要求...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-80 space-y-6">
+                        <div class="bg-tf-gradient p-8 rounded-[40px] text-white shadow-2xl shadow-tf/30 relative overflow-hidden">
+                            <p class="text-white/60 text-[10px] font-black uppercase mb-2">可提现总额</p>
+                            <h2 class="text-3xl font-black mb-10">¥ 145,290</h2>
+                            <button onclick="scrollToPage('m3')" class="w-full bg-white text-tf py-4 rounded-2xl font-black text-sm shadow-xl">管理钱包/提现</button>
+                            <div class="mt-8 pt-6 border-t border-white/10 flex justify-between text-[10px] opacity-70">
+                                <span>托管中金额: ¥ 12,500</span>
+                                <i class="fas fa-circle-info"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- [M2] 商家工作台交付 (乙方) -->
+        <div id="m2" class="web-screen flex flex-col bg-white">
+            <header class="h-20 border-b px-12 flex items-center justify-between shrink-0">
+                <div class="flex items-center gap-4">
+                    <button onclick="scrollToPage('m1')" class="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-gray-400"><i class="fas fa-chevron-left"></i></button>
+                    <h2 class="font-black text-xl">节点交付申请</h2>
+                </div>
+            </header>
+            <main class="flex-1 p-12 bg-slate-50 flex gap-10 no-scrollbar overflow-y-auto">
+                <div class="flex-1 space-y-8">
+                    <div class="bg-white p-10 rounded-[40px] border border-gray-100">
+                        <h3 class="font-black text-gray-800 mb-8 flex items-center gap-2">上传交付产物 <span class="text-xs text-tf font-normal ml-2">文件将自动进行司法哈希存证</span></h3>
+                        <div class="border-4 border-dashed border-slate-50 rounded-[32px] p-20 text-center hover:border-tf/20 transition cursor-pointer bg-slate-50/20">
+                            <i class="fas fa-cloud-arrow-up text-5xl text-tf/20 mb-6"></i>
+                            <p class="font-black text-gray-400 text-lg">点击选择或拖拽交付物到此处</p>
+                            <p class="text-xs text-gray-400 mt-2">支持全格式，最大 1GB，文件将进行上链处理</p>
+                        </div>
+                        <div class="mt-10">
+                            <label class="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4">交付详情说明</label>
+                            <textarea placeholder="描述本次交付的核心内容及待确认项..." class="w-full bg-slate-50/50 border-2 border-slate-50 p-6 rounded-3xl h-40 outline-none focus:border-tf/20 transition"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-96 space-y-6 shrink-0">
+                    <div class="bg-white p-8 rounded-[40px] border border-gray-100">
+                        <h4 class="font-black text-gray-800 mb-6">本次预拨付资金</h4>
+                        <div class="flex justify-between items-end">
+                            <span class="text-xs text-gray-400 font-bold">阶段一: 原型图确认</span>
+                            <span class="text-2xl font-black text-tf">¥ 5,000</span>
+                        </div>
+                        <div class="mt-8 pt-8 border-t space-y-4">
+                            <div class="flex gap-3 text-[11px] text-gray-500">
+                                <i class="fas fa-shield text-tf/40"></i>
+                                <span>提交后，资金将进入甲方验收期，最长 48 小时。</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="w-full bg-tf-gradient text-white py-6 rounded-[32px] font-black text-lg shadow-2xl shadow-tf/20 hover:scale-[1.02] transition">正式提交交付</button>
+                </div>
+            </main>
+        </div>
+
+        <!-- [M3] 财务结算中心 (乙方) -->
+        <div id="m3" class="web-screen flex flex-col">
+            <header class="h-20 bg-white border-b px-12 flex items-center justify-between shrink-0">
+                <h2 class="text-xl font-black text-gray-800">资金与结算流水</h2>
+                <div class="flex gap-3">
+                    <button class="px-6 py-2 bg-gray-50 text-gray-500 rounded-xl text-xs font-bold border border-gray-200">导出记录</button>
+                    <button class="px-6 py-2 bg-tf text-white rounded-xl text-xs font-bold shadow-lg shadow-tf/20">申请结算</button>
+                </div>
+            </header>
+            <main class="flex-1 p-12 bg-slate-50 no-scrollbar overflow-y-auto">
+                <div class="grid grid-cols-3 gap-8 mb-12">
+                    <div class="bg-white p-10 rounded-[40px] border border-gray-100 shadow-sm">
+                        <p class="text-[10px] text-gray-400 font-black uppercase mb-2">累计总收益</p>
+                        <h3 class="text-3xl font-black text-gray-800">¥ 145,290</h3>
+                    </div>
+                    <div class="bg-white p-10 rounded-[40px] border border-gray-100 shadow-sm">
+                        <p class="text-[10px] text-gray-400 font-black uppercase mb-2">信托托管中</p>
+                        <h3 class="text-3xl font-black text-tf">¥ 25,000</h3>
+                    </div>
+                    <div class="bg-white p-10 rounded-[40px] border border-gray-100 shadow-sm">
+                        <p class="text-[10px] text-gray-400 font-black uppercase mb-2">可结算提现</p>
+                        <h3 class="text-3xl font-black text-green-500">¥ 12,400</h3>
+                    </div>
+                </div>
+                <div class="bg-white rounded-[40px] border border-gray-100 shadow-sm overflow-hidden">
+                    <table class="w-full text-left">
+                        <thead class="bg-gray-50/50">
+                            <tr class="text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100">
+                                <th class="px-10 py-6">时间</th>
+                                <th class="px-10 py-6">交易摘要</th>
+                                <th class="px-10 py-6">存证哈希</th>
+                                <th class="px-10 py-6 text-right">变动金额</th>
+                                <th class="px-10 py-6 text-center">状态</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-50">
+                            <tr class="hover:bg-gray-50/50 transition">
+                                <td class="px-10 py-8 text-[11px] text-gray-400 font-medium">2023-11-20 18:00</td>
+                                <td class="px-10 py-8 font-black text-gray-800 text-sm">官方管理系统_阶段一结算释放</td>
+                                <td class="px-10 py-8 text-[10px] text-gray-400 font-mono">HASH: 8f2a...1a</td>
+                                <td class="px-10 py-8 text-right font-black text-gray-800">+ ¥ 5,000.00</td>
+                                <td class="px-10 py-8 text-center"><span class="text-[10px] font-black text-green-500 bg-green-50 px-3 py-1 rounded-full border border-green-100">已入账</span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50/50 transition">
+                                <td class="px-10 py-8 text-[11px] text-gray-400 font-medium">2023-11-19 12:30</td>
+                                <td class="px-10 py-8 font-black text-gray-800 text-sm">跨境支付方案需求投标保证金退回</td>
+                                <td class="px-10 py-8 text-[10px] text-gray-400 font-mono">HASH: f922...01</td>
+                                <td class="px-10 py-8 text-right font-black text-gray-800">+ ¥ 1,000.00</td>
+                                <td class="px-10 py-8 text-center"><span class="text-[10px] font-black text-green-500 bg-green-50 px-3 py-1 rounded-full border border-green-100">已入账</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+
+    </div>
+
+    <script>
+        function scrollToPage(id) {
+            const element = document.getElementById(id);
+            element.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'center' });
+            
+            // 切换全局视角高亮
+            const btnU = document.getElementById('btn-u');
+            const btnM = document.getElementById('btn-m');
+            
+            if (id.startsWith('u')) {
+                btnU.classList.add('active');
+                btnU.classList.remove('text-gray-500');
+                btnM.classList.remove('active');
+                btnM.classList.add('text-gray-500');
+            } else {
+                btnM.classList.add('active');
+                btnM.classList.remove('text-gray-500');
+                btnU.classList.remove('active');
+                btnU.classList.add('text-gray-500');
+            }
+        }
+        
+        // 初始滚动到 U1
+        window.onload = () => scrollToPage('u1');
+    </script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+@charset "UTF-8";
+/* 主题变量 */
+/* 圆角 */
+/* 间距 */
+.page.data-v-44d71a5a {
+  min-height: 100vh;
+  background: #f5f7fa;
+  padding-bottom: 160rpx;
+}
+.steps.data-v-44d71a5a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40rpx 32rpx;
+  background: #fff;
+}
+.step-item.data-v-44d71a5a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+}
+.step-circle.data-v-44d71a5a {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  background: #e5e7eb;
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+.step-item.active .step-circle.data-v-44d71a5a {
+  background: #00AFE1;
+  color: #fff;
+}
+.step-item.completed .step-circle.data-v-44d71a5a {
+  background: #10b981;
+  color: #fff;
+}
+.step-text.data-v-44d71a5a {
+  font-size: 22rpx;
+  color: #9ca3af;
+  transition: all 0.3s;
+}
+.step-item.active .step-text.data-v-44d71a5a {
+  color: #00AFE1;
+  font-weight: 600;
+}
+.step-line.data-v-44d71a5a {
+  flex: 1;
+  height: 4rpx;
+  background: #e5e7eb;
+  margin: 0 16rpx;
+  transition: all 0.3s;
+}
+.step-line.active.data-v-44d71a5a {
+  background: #00AFE1;
+}
+.content-scroll.data-v-44d71a5a {
+  height: calc(100vh - 136rpx - 160rpx);
+  padding: 32rpx;
+}
+.step-content.data-v-44d71a5a {
+  -webkit-animation: fadeIn-data-v-44d71a5a 0.3s;
+          animation: fadeIn-data-v-44d71a5a 0.3s;
+}
+@-webkit-keyframes fadeIn-data-v-44d71a5a {
+from {
+    opacity: 0;
+    -webkit-transform: translateY(20rpx);
+            transform: translateY(20rpx);
+}
+to {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+}
+}
+@keyframes fadeIn-data-v-44d71a5a {
+from {
+    opacity: 0;
+    -webkit-transform: translateY(20rpx);
+            transform: translateY(20rpx);
+}
+to {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+}
+}
+.form-card.data-v-44d71a5a {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 40rpx;
+}
+.card-title.data-v-44d71a5a {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 32rpx;
+  padding-bottom: 24rpx;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+.form-item.data-v-44d71a5a {
+  margin-bottom: 32rpx;
+}
+.form-label.data-v-44d71a5a {
+  display: block;
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 16rpx;
+}
+.required.data-v-44d71a5a {
+  color: #ef4444;
+}
+.form-input.data-v-44d71a5a,
+.form-textarea.data-v-44d71a5a {
+  width: 100%;
+  padding: 24rpx;
+  background: #f5f7fa;
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  color: #333;
+  border: 2rpx solid transparent;
+}
+.form-input.data-v-44d71a5a:focus,
+.form-textarea.data-v-44d71a5a:focus {
+  border-color: #00AFE1;
+  background: #fff;
+}
+.form-textarea.data-v-44d71a5a {
+  min-height: 200rpx;
+}
+.form-readonly.data-v-44d71a5a {
+  padding: 24rpx;
+  background: #f5f7fa;
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  color: #999;
+}
+.form-picker.data-v-44d71a5a {
+  padding: 24rpx;
+  background: #f5f7fa;
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+.char-count.data-v-44d71a5a {
+  display: block;
+  text-align: right;
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+.amount-card.data-v-44d71a5a {
+  background: linear-gradient(135deg, #00AFE1 0%, #0084A8 100%);
+  border-radius: 24rpx;
+  padding: 40rpx;
+  margin-bottom: 32rpx;
+  text-align: center;
+}
+.amount-label.data-v-44d71a5a {
+  display: block;
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 16rpx;
+}
+.amount-value.data-v-44d71a5a {
+  display: block;
+  font-size: 56rpx;
+  font-weight: 900;
+  color: #fff;
+}
+.stages-list.data-v-44d71a5a {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+.stage-item.data-v-44d71a5a {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  padding: 32rpx;
+  background: #f5f7fa;
+  border-radius: 16rpx;
+}
+.stage-number.data-v-44d71a5a {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  background: #00AFE1;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.stage-info.data-v-44d71a5a {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+.stage-name.data-v-44d71a5a {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+}
+.stage-milestone.data-v-44d71a5a {
+  font-size: 22rpx;
+  color: #999;
+}
+.stage-amount.data-v-44d71a5a {
+  text-align: right;
+}
+.stage-amount .amount.data-v-44d71a5a {
+  display: block;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #00AFE1;
+}
+.stage-amount .percent.data-v-44d71a5a {
+  display: block;
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 4rpx;
+}
+.clause-item.data-v-44d71a5a {
+  margin-bottom: 24rpx;
+}
+.clause-header.data-v-44d71a5a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx;
+  background: #f5f7fa;
+  border-radius: 16rpx;
+  cursor: pointer;
+}
+.clause-title.data-v-44d71a5a {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+}
+.clause-icon.data-v-44d71a5a {
+  font-size: 20rpx;
+  color: #999;
+}
+.clause-textarea.data-v-44d71a5a {
+  width: 100%;
+  min-height: 240rpx;
+  padding: 24rpx;
+  background: #fff;
+  border: 2rpx solid #e5e7eb;
+  border-radius: 16rpx;
+  font-size: 26rpx;
+  color: #333;
+  line-height: 1.6;
+  margin-top: 16rpx;
+}
+.bottom-bar.data-v-44d71a5a {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  padding: 24rpx 32rpx;
+  padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
+  box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.05);
+}
+.btn-group.data-v-44d71a5a {
+  display: flex;
+  gap: 24rpx;
+}
+.btn.data-v-44d71a5a {
+  flex: 1;
+  height: 88rpx;
+  border-radius: 24rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  border: none;
+}
+.btn-secondary.data-v-44d71a5a {
+  background: #f5f7fa;
+  color: #666;
+}
+.btn-primary.data-v-44d71a5a {
+  background: linear-gradient(135deg, #00AFE1 0%, #0084A8 100%);
+  color: #fff;
+}

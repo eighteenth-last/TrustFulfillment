@@ -1,0 +1,58 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/task/list",
+    "pages/task/detail",
+    "pages/task/create",
+    "pages/order/confirm",
+    "pages/order/list",
+    "pages/order/detail",
+    "pages/merchant/index",
+    "pages/wallet/index",
+    "pages/wallet/recharge",
+    "pages/dispute/index",
+    "pages/user/index",
+    "pages/user/contract",
+    "pages/user/contract-edit",
+    "pages/user/contract-sign",
+    "pages/user/security",
+    "pages/user/help",
+    "pages/user/about",
+    "pages/user/profile",
+    "pages/merchant/apply",
+    "pages/login/index"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "臻托",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#999999",
+    "selectedColor": "#00AFE1",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/task/list",
+        "text": "任务大厅"
+      },
+      {
+        "pagePath": "pages/order/list",
+        "text": "订单"
+      },
+      {
+        "pagePath": "pages/user/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {}
+}
